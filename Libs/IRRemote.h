@@ -6,7 +6,8 @@
 #include"stm8s_gpio.h"
 
 
-#define IRREMOTE GPIOB,GPIO_PIN_2 
+//#define IRREMOTE GPIOB,GPIO_PIN_2
+#define IRREMOTE GPIOB,GPIO_PIN_3
 
 
 // ***************** Key Mapp of Remote
@@ -77,7 +78,7 @@
 #define OFF_STATUS 'F'
 
 
-#define  TABATA 'S'
+
 
 uint8_t  IRRemote_Read(void);
 void IRRemote_Config(void);

@@ -5,6 +5,8 @@
 #include "IRRemote.h"
 
 
+void delay_us(int time);
+
 
 #define SEGMENT_0_PIN  GPIOE,GPIO_PIN_7     
 #define SEGMENT_1_PIN  GPIOE,GPIO_PIN_6 
@@ -45,6 +47,7 @@
 
 #define SYSTEMCOLOR 'Y'
 #define COLOR_HISTORY_1 'X'
+#define COLOR_HISTORY_2 'x'
 
 #define LEVEL_FULL 25
 

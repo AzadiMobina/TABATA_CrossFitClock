@@ -2,7 +2,7 @@
 
 
 unsigned char segmentdata[14][3];
-unsigned char dotpointdata[4][3];
+unsigned char dotpointdata[14][3];
 
 void Segment_Pins_Config(void)
 {
@@ -728,7 +728,7 @@ void DotPoints_Update(void)
     int i;
     int j;
 
-    for(j=0;j<4;j++)
+    for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
         {
@@ -893,10 +893,10 @@ void Segment_Map(uint8_t num)
             Segment_SetData(0 , ON );
             Segment_SetData(1 , ON );
             Segment_SetData(2 , ON );
-            Segment_SetData(3 , ON );
-            Segment_SetData(4 , OFF);
-            Segment_SetData(5 , OFF);
-            Segment_SetData(6 , OFF);
+            Segment_SetData(3 , OFF);
+            Segment_SetData(4 , ON );
+            Segment_SetData(5 , ON );
+            Segment_SetData(6 , ON );
             break;
         
         case 'I':
@@ -929,6 +929,53 @@ void Segment_Map(uint8_t num)
             Segment_SetData(6 , ON );
             break;
         
+        case 'U':
+            Segment_SetData(0 , ON );
+            Segment_SetData(1 , ON );
+            Segment_SetData(2 , ON );
+            Segment_SetData(3 , OFF);
+            Segment_SetData(4 , ON );
+            Segment_SetData(5 , OFF);
+            Segment_SetData(6 , ON );
+            break;
+        
+        case 'P':
+            Segment_SetData(0 , OFF);
+            Segment_SetData(1 , OFF);
+            Segment_SetData(2 , ON );
+            Segment_SetData(3 , ON );
+            Segment_SetData(4 , ON );
+            Segment_SetData(5 , ON );
+            Segment_SetData(6 , ON );
+            break;
+        case 'S':
+            Segment_SetData(0 , ON );
+            Segment_SetData(1 , ON );
+            Segment_SetData(2 , OFF);
+            Segment_SetData(3 , ON );
+            Segment_SetData(4 , OFF);
+            Segment_SetData(5 , ON );
+            Segment_SetData(6 , ON );
+            break; 
+        case 'F':
+            Segment_SetData(0 , OFF);
+            Segment_SetData(1 , OFF);
+            Segment_SetData(2 , ON );
+            Segment_SetData(3 , ON );
+            Segment_SetData(4 , OFF );
+            Segment_SetData(5 , ON );
+            Segment_SetData(6 , ON );
+            break;   
+        case 'N':
+            Segment_SetData(0 , OFF);
+            Segment_SetData(1 , OFF);
+            Segment_SetData(2 , OFF);
+            Segment_SetData(3 , ON );
+            Segment_SetData(4 , OFF);
+            Segment_SetData(5 , OFF);
+            Segment_SetData(6 , OFF);
+            break;
+
         default:
             Segment_SetData(0 , OFF);
             Segment_SetData(1 , OFF);
@@ -1023,6 +1070,8 @@ void Segment_SetColor(uint8_t colornum , uint8_t lightlevel)
         colornum = Color_Get(0);
     else if(colornum == COLOR_HISTORY_1)
         colornum = Color_Get(1);
+    else if(colornum == COLOR_HISTORY_2)
+        colornum = Color_Get(2);
 
     switch (colornum)
     {
@@ -1164,6 +1213,8 @@ void DotPoints_SetColor(uint8_t colornum , uint8_t lightlevel)
         colornum = Color_Get(0);
     else if(colornum == COLOR_HISTORY_1)
         colornum = Color_Get(1);
+    else if(colornum == COLOR_HISTORY_2)
+        colornum = Color_Get(2);
 
     switch (colornum)
     {
@@ -1343,9 +1394,10 @@ void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlev
 
 void DotPoints(uint8_t dotnum,uint8_t state, uint8_t colornum,uint8_t lightlevel)
 {
-    //DotPoints_Map(dotnum,state);
-    //DotPoints_SetColor(colornum,lightlevel);
-    //DotPoints_Update();
+   /* DotPoints_Map(dotnum,state);
+    DotPoints_SetColor(colornum,lightlevel);
+    DotPoints_Update();
+    delay_us(10);*/
 
     if(state == 1)
         Segment(6,8,SYSTEMCOLOR,LEVEL_FULL);

@@ -22,19 +22,82 @@ int time_TempShow = 0;
 uint8_t time_update_all = 0;
 uint8_t update_all = 1;
 
-int time_Second_Cornometer = 0;
-int time_Minute_Cornometer = 0;
-int time_Hour_Cornometer = 0;
-uint8_t cornometer_run = 0;
+int time_Second_Counter = 0;
+int time_Minute_Counter = 0;
+int time_Hour_Counter = 0;
+int time_Minute_Counter_setting = 0;
+int time_Second_Counter_setting = 0;
+uint8_t counter_run = 0;
+uint8_t counter_start = 0;
+int time_Second_dn=0;
+int time_Minute_dn =0;
+
+int time_Minute_Cornometr = 0;
+uint8_t time_Second_Cornometr = 0;
+uint8_t time_mili_Second_Cornometr = 0;
+
+uint8_t Cornometr_run = 0;
+
+uint8_t start = 0;
+uint8_t run = 0;
+int CYKEL = 8;
+int ACT = 20;
+int REST = 10;
+int REST_setting = 10;
+int ACT_setting = 20;
+int CYKEL_setting = 8;
+int Starting_time = 10;
+uint8_t ACT_OK = 0;
+uint8_t REST_OK = 0;
+
+int WORK = 60;
+int TIMES = 5;
+int ROUND = 5;
+int TIMES_setting = 5;
+int ROUND_setting = 5;
+int WORK_setting = 60;
+int tmp = 0;
+uint8_t WORK_OK = 0;
+uint8_t TIMES_OK = 0;  ////???????
+uint8_t ROUND_OK = 0;
+
+int time_Second_AMRAP = 30;
+int time_Minute_AMRAP = 1;
+uint8_t AMRAP_run = 0;
+int time_Minute_AMRAP_setting = 1;
+int time_Second_AMRAP_setting = 30;
 
 
+int CONDITION = 1;
+
+#define MENU 	'S'
+#define  TABATA 'T'
+#define EMOM 	'E'
+#define AMRAP 	'A'
+#define SET_CYKEL 'c'
+#define SET_ACT	'a'
+#define SET_REST 'r'
+#define DEFAULT 'e'
+
+
+#define SET_ROUND	'R'
+#define SET_TIMES 	't'
 #define MODE_SET_CLOCK_HOUR     'H'
 #define MODE_SET_CLOCK_MINUTE   'M'
-#define MODE_CORNOMETER_UP      'U'
-#define MODE_CORNOMETER_DN      'D'
+#define MODE_COUNTER_UP      	'U'
+#define MODE_COUNTER_DN      	'D'
+#define MODE_CORNOMETR          'C'
+#define SET_M_COUNTER_UP		'm'
+#define SET_S_COUNTER_UP		's'
+#define SET_M_COUNTER_DN	    'd'
+#define SET_S_COUNTER_DN	    'S'
+#define SET_M_AMRAP_DN			'p'
+#define SET_S_AMRAP_DN			'P'
 #define MODE_NORMAL             'N'
 #define BLINK                   'B'
 
+
+uint8_t SETTING = DEFAULT;
 uint8_t work_Mode = MODE_NORMAL;
 uint8_t mode_show_12 = 0;
 uint8_t mode_show_OFF = 0;
@@ -67,6 +130,21 @@ void delay_ms(int time)
             nop();
         }
     }
+    
+}
+
+void delay_us(int time)
+{
+    int i;
+    int j;
+    int clock;
+    clock = CLK_GetClockFreq()/20000;
+
+	for (i = 0; i < clock; i++)
+	{
+		nop();
+	}
+
     
 }
 
