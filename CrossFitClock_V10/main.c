@@ -1454,6 +1454,7 @@ main()
 		else if(work_Mode == AMRAP) /// as many roand aspossible
 		{
 			time_UnNormal = 0;
+			
 
 			segments_value_present[0] = '0';
 			segments_value_present[1] = '0';
