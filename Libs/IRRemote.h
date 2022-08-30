@@ -6,8 +6,8 @@
 #include"stm8s_gpio.h"
 
 
-//#define IRREMOTE GPIOB,GPIO_PIN_2
-#define IRREMOTE GPIOB,GPIO_PIN_3
+#define IRREMOTE GPIOB,GPIO_PIN_2
+//#define IRREMOTE GPIOB,GPIO_PIN_3
 
 
 // ***************** Key Mapp of Remote

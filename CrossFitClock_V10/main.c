@@ -21,7 +21,7 @@ main()
 	int8_t tempreture = 25;
 	uint8_t dotpint_state = 1;
 	uint8_t dotpint_state_last = 0;
-	uint8_t part=10;
+	//uint8_t part=10;
 
 	Initializer();
 
@@ -46,7 +46,6 @@ main()
 				segments_value_present[1] = time_Hour%10;
 
 			}
-			
 			
 			segments_value_present[2] = time_Minute/10;
 			segments_value_present[3] = time_Minute%10;
@@ -111,30 +110,7 @@ main()
 
 					Buzz(200);
 				}
-				else if((irRemote_feedback == KEY_3))
-				{
-					work_Mode = MODE_COUNTER_UP;
-					time_UnNormal = 0;
-					part = 10;
-					update_all = 1;
-					time_Minute_Counter = 0;
-					time_Second_Counter = 0;
-					counter_run = 0;
-					Buzz(200);
-
-				}
-				else if((irRemote_feedback == KEY_4))
-				{
-					work_Mode = MODE_COUNTER_DN;
-					time_UnNormal = 0;
-					part = 10;
-					update_all = 1;
-					time_Minute_Counter = 90;
-					time_Second_Counter = 0;
-					counter_run = 0;
-					Buzz(200);
-					
-				}
+				
 				else if(irRemote_feedback == ONN_STATUS)
 				{
 					work_Mode = MENU;
@@ -182,8 +158,6 @@ main()
 		
 		
 		}
-
-		
 
 		else if(work_Mode == MENU )
 		{
@@ -233,7 +207,7 @@ main()
 					}
 					else if(CONDITION == 3)
 					{
-						work_Mode = MODE_COUNTER_DN;
+						work_Mode = AMRAP ;
 						Buzz(100);
 					}
 					else if(CONDITION == 4)
@@ -243,7 +217,7 @@ main()
 					}
 					else if( CONDITION == 5)
 					{
-						work_Mode = AMRAP;
+						work_Mode = MODE_COUNTER_DN;
 						Buzz(100);
 					}
 				}
@@ -1114,6 +1088,7 @@ main()
 				else if(irRemote_feedback == OFF_STATUS)
 				{
 					start = 0;
+					run = 0;
 					CYKEL = CYKEL_setting;
 					ACT = ACT_setting ;
 					REST = REST_setting ;
@@ -1205,9 +1180,11 @@ main()
 					{
 						ROUND =ROUND_setting;
 						WORK_setting = ((TIMES*60) / ROUND);
+						
 						if(WORK_setting>99)
 							WORK_setting = 99;
 						WORK = WORK_setting;
+						Starting_time= 10;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1258,6 +1235,7 @@ main()
 						if(WORK_setting>99)
 							WORK_setting = 99;
 						WORK = WORK_setting;
+						Starting_time = 10;
 						SETTING = DEFAULT;
 						Buzz(100);
 						delay_ms(50);
@@ -1284,11 +1262,12 @@ main()
 
 							if(Starting_time<0)
 							{
-								Buzz(300);
-								WORK_OK = 1;
-								WORK = WORK_setting;
 								run = 0;
+								WORK = WORK_setting;
 								TIMES_OK = 1;
+								WORK_OK = 1;
+								Buzz(300);
+								
 							}
 						}
 
@@ -1317,9 +1296,8 @@ main()
 								WORK = (WORK_setting-1);
 							//	WORK_OK = 0;
 								ROUND--;
-								Buzz(200);
-								delay_ms(50);
-								Buzz(200);
+								Buzz(400);
+								
 							}									
 						}
 
@@ -1331,14 +1309,17 @@ main()
 							WORK = WORK_setting;
 							TIMES = TIMES_setting;
 							tmp = (TIMES_setting * 60);
+							Starting_time = 10;
+							run = 1;
+							WORK_OK = 0;
+							start = 0;
 							Buzz(100);
 							delay_ms(150);
 							Buzz(100);
 							delay_ms(150);
 							Buzz(100);
 							delay_ms(300);
-							run = 1;
-							start = 0;
+							
 
 						}	
 						
@@ -1416,6 +1397,7 @@ main()
 					ROUND = ROUND_setting;
 					WORK = WORK_setting ;
 					TIMES = TIMES_setting ;
+					Starting_time = 10;
 					work_Mode = MODE_NORMAL;
 					update_all = 1;
 					Buzz(100);
@@ -1453,7 +1435,7 @@ main()
 		
 		}
 
-		else if(work_Mode == AMRAP) /// as many roand aspossible
+		else if(work_Mode == AMRAP) /// As Many Round As Possible
 		{
 			time_UnNormal = 0;
 
@@ -1470,32 +1452,56 @@ main()
 				if(time_secbit == 1)
 				{
 					time_secbit = 0;
-					if(AMRAP_run == 1)
+					if(start == 1)
 					{
-						time_Second_AMRAP --;
-						if(time_Second_AMRAP < 0)
+						if(run == 1)
 						{
-							time_Second_AMRAP = 59;
-							time_Minute_AMRAP = time_Minute_AMRAP - 1;
-							if(time_Minute_AMRAP < 0)
-							{
-								//if(time_Second_Counter == 0)
-								//{
+							Starting_time --;
+							time_Second_AMRAP = Starting_time;							
+							if(Starting_time <3)
+								Buzz(100);
 
-									time_Minute_AMRAP = time_Minute_AMRAP_setting;
-									time_Second_AMRAP = time_Second_AMRAP_setting;
-									Buzz(100);
-									delay_ms(150);
-									Buzz(100);
-									delay_ms(150);
-									Buzz(100);
-									delay_ms(150);
-									AMRAP_run = 0;	
-								//}
+							if(Starting_time<0)
+							{
+								run = 0;
+								time_Second_AMRAP = time_Second_AMRAP_setting;
+								AMRAP_run = 1;
+								Buzz(300);
 								
 							}
 						}
+						else if(AMRAP_run == 1)
+						{
+							time_Second_AMRAP --;
+							if(time_Second_AMRAP < 0)
+							{
+								time_Second_AMRAP = 59;
+								time_Minute_AMRAP = time_Minute_AMRAP - 1;
+								if(time_Minute_AMRAP < 0)
+								{
+									//if(time_Second_Counter == 0)
+									//{
+
+										time_Minute_AMRAP = time_Minute_AMRAP_setting;
+										time_Second_AMRAP = time_Second_AMRAP_setting;
+										AMRAP_run = 0;
+										start = 0;	
+										run = 1;
+										Starting_time = 10;
+										Buzz(100);
+										delay_ms(150);
+										Buzz(100);
+										delay_ms(150);
+										Buzz(100);
+										delay_ms(150);
+										
+									//}
+									
+								}
+							}
+						}
 					}
+					
 
 				}
 			}
@@ -1540,6 +1546,7 @@ main()
 					{
 						time_Minute_AMRAP = time_Minute_AMRAP_setting;
 						time_Second_AMRAP = time_Second_AMRAP_setting;
+						Starting_time= 10;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1588,6 +1595,7 @@ main()
 					{
 						time_Minute_AMRAP = time_Minute_AMRAP_setting;
 						time_Second_AMRAP = time_Second_AMRAP_setting;
+						Starting_time = 10;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1605,22 +1613,23 @@ main()
 				}
 				else if(irRemote_feedback == ONN_STATUS)
 				{
-					if(AMRAP_run == 0)
+					if(start == 0)
 					{
-						AMRAP_run = 1;
+						start = 1;
 						Buzz(200);
 					}	
 					else
 					{
-						AMRAP_run = 0;
+						start = 0;
 						Buzz(200);
 					}
 				}
 				else if(irRemote_feedback == OFF_STATUS)
 				{
-					AMRAP_run = 0;
-					time_Minute_Counter = 0;
-					time_Second_Counter = 0;
+					start = 0;
+					time_Minute_AMRAP = time_Minute_AMRAP_setting;
+					time_Second_AMRAP = time_Second_AMRAP_setting;
+					Starting_time = 10;
 					work_Mode = MODE_NORMAL;
 					Buzz(100);
 					delay_ms(50);
@@ -1628,9 +1637,11 @@ main()
 				}
 				else if(irRemote_feedback == KEY_1)
 				{
-					AMRAP_run = 0;
-					time_Minute_Counter = time_Minute_Counter_setting;
-					time_Second_Counter = time_Second_AMRAP_setting;
+					start = 0;
+					run = 1;
+					Starting_time = 10;
+					time_Minute_AMRAP = time_Minute_AMRAP_setting;
+					time_Second_AMRAP = time_Second_AMRAP_setting;
 					Buzz(100);
 					delay_ms(50);
 					Buzz(100);
@@ -1638,11 +1649,10 @@ main()
 				else if((irRemote_feedback == KEY_2))
 				{
 					SETTING = SET_M_AMRAP_DN;
-					//part = 10;
 					time_UnNormal = 0;
-					time_Minute_AMRAP = time_Minute_Counter_setting;
+					time_Minute_AMRAP = time_Minute_AMRAP_setting;
 					time_Second_AMRAP = time_Minute_AMRAP_setting;
-					AMRAP_run = 0;
+					start = 0;
 					Buzz(100);
 					delay_ms(100);
 					Buzz(100);
@@ -1651,11 +1661,10 @@ main()
 				else if((irRemote_feedback == KEY_3))
 				{
 					SETTING = SET_S_AMRAP_DN;
-					//part = 10;
 					time_UnNormal = 0;
-					time_Minute_Counter = time_Minute_Counter_setting;
-					time_Second_Counter = time_Second_AMRAP_setting;
-					AMRAP_run = 0;
+					time_Minute_AMRAP = time_Minute_AMRAP_setting;
+					time_Second_AMRAP = time_Second_AMRAP_setting;
+					start = 0;
 					Buzz(100);
 					delay_ms(100);
 					Buzz(100);
