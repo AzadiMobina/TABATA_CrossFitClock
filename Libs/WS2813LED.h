@@ -7,7 +7,7 @@
 
 void delay_us(int time);
 
-
+/*
 #define SEGMENT_0_PIN  GPIOE,GPIO_PIN_7     
 #define SEGMENT_1_PIN  GPIOE,GPIO_PIN_6 
 #define SEGMENT_2_PIN  GPIOE,GPIO_PIN_5 
@@ -18,6 +18,18 @@ void delay_us(int time);
 #define SEGMENT_7_PIN  GPIOC,GPIO_PIN_6 
 #define SEGMENT_8_PIN  GPIOC,GPIO_PIN_7 
 #define SEGMENT_9_PIN GPIOG,GPIO_PIN_0 
+*/
+
+#define SEGMENT_0_PIN  GPIOC,GPIO_PIN_2     
+#define SEGMENT_1_PIN  GPIOC,GPIO_PIN_1 
+#define SEGMENT_2_PIN  GPIOE,GPIO_PIN_5 
+#define SEGMENT_3_PIN  GPIOE,GPIO_PIN_6 
+#define SEGMENT_4_PIN  GPIOE,GPIO_PIN_7 
+#define SEGMENT_5_PIN  GPIOB,GPIO_PIN_0
+#define SEGMENT_6_PIN  GPIOG,GPIO_PIN_1 
+#define SEGMENT_7_PIN  GPIOG,GPIO_PIN_0 
+#define SEGMENT_8_PIN  GPIOC,GPIO_PIN_7 
+#define SEGMENT_9_PIN  GPIOC,GPIO_PIN_6 
 
 #define SEGMENT_0  '0'     
 #define SEGMENT_1  '1' 

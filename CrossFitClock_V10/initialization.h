@@ -46,7 +46,7 @@ int REST = 10;
 int REST_setting = 10;
 int ACT_setting = 20;
 int CYKEL_setting = 8;
-int Starting_time = 10;
+int Starting_time = 11;
 uint8_t ACT_OK = 0;
 uint8_t REST_OK = 0;
 

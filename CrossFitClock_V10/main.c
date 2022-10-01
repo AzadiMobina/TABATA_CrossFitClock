@@ -1,3 +1,6 @@
+
+
+
 /* MAIN.C file
  * 
  * Copyright (c) 2002-2005 STMicroelectronics
@@ -159,6 +162,8 @@ main()
 		
 		}
 
+
+
 		else if(work_Mode == MENU )
 		{
 			time_UnNormal = 0;
@@ -194,6 +199,10 @@ main()
 					Buzz(100);
 				}
 				else if(irRemote_feedback == ONN_STATUS)
+				{
+					
+				}
+				else if (irRemote_feedback == KEY_1)
 				{
 					if(CONDITION == 1)
 					{
@@ -911,14 +920,14 @@ main()
 					}
 					else if(irRemote_feedback == INCREASE)
 					{
-						if(++REST_setting>30)
+						if(++REST_setting>60)
 							REST_setting = 0;
 						Buzz(100);
 					}
 					else if(irRemote_feedback == DECREASE)
 					{
 						if(REST_setting == 0)
-							REST_setting = 30;
+							REST_setting = 60;
 						else 
 							--REST_setting;
 						Buzz(100);
@@ -945,10 +954,10 @@ main()
 						{
 							Starting_time --;
 							REST = Starting_time;							
-							if(Starting_time <3)
+							if(Starting_time <4)
 								Buzz(100);
 
-							if(Starting_time<0)
+							if(Starting_time<1)
 							{
 								
 								REST = REST_setting;
@@ -962,7 +971,7 @@ main()
 						{
 							
 							--ACT;
-							if(ACT < 0)
+							if(ACT < 1)
 							{
 								ACT = ACT_setting;
 								ACT_OK = 0;
@@ -977,10 +986,10 @@ main()
 						{
 							
 							--REST;
-							if(REST <3)
+							if(REST <4)
 								Buzz(100);
 
-							if(REST<0)
+							if(REST<1)
 							{
 								--CYKEL;
 								Buzz(400);
@@ -1002,7 +1011,7 @@ main()
 							delay_ms(150);
 							Buzz(100);
 							delay_ms(300);
-							run = 1;
+							ACT_OK = 0;
 							start = 0;
 
 						}	
@@ -1023,7 +1032,7 @@ main()
 				{
 					start = 0;
 					run = 1;
-					Starting_time = 10;
+					Starting_time = 11;
 					REST_OK =0;
 					ACT_OK = 0;
 					CYKEL = CYKEL_setting;
@@ -1037,6 +1046,7 @@ main()
 				else if(irRemote_feedback == KEY_2)
 				{
 					start = 0;
+					run = 0;
 					SETTING = SET_CYKEL;
 					REST = REST_setting ;
 					ACT = ACT_setting;
@@ -1051,6 +1061,7 @@ main()
 				else if(irRemote_feedback == KEY_3)
 				{
 					start = 0;
+					run = 0;
 					SETTING = SET_ACT;
 					REST = REST_setting ;
 					ACT = ACT_setting;
@@ -1063,6 +1074,7 @@ main()
 				else if(irRemote_feedback == KEY_4)
 				{
 					start = 0;
+					run = 0;
 					SETTING = SET_REST;
 					REST = REST_setting ;
 					ACT = ACT_setting;
@@ -1184,7 +1196,7 @@ main()
 						if(WORK_setting>99)
 							WORK_setting = 99;
 						WORK = WORK_setting;
-						Starting_time= 10;
+						Starting_time= 11;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1235,7 +1247,7 @@ main()
 						if(WORK_setting>99)
 							WORK_setting = 99;
 						WORK = WORK_setting;
-						Starting_time = 10;
+						Starting_time = 11;
 						SETTING = DEFAULT;
 						Buzz(100);
 						delay_ms(50);
@@ -1257,10 +1269,10 @@ main()
 						{
 							Starting_time --;
 							WORK = Starting_time;							
-							if(Starting_time <3)
+							if(Starting_time <4)
 								Buzz(100);
 
-							if(Starting_time<0)
+							if(Starting_time<1)
 							{
 								run = 0;
 								WORK = WORK_setting;
@@ -1288,12 +1300,12 @@ main()
 						{
 							
 							--WORK;
-							if(WORK <3)
+							if(WORK <4)
 								Buzz(100);
 
-							if(WORK < 0)
+							if(WORK < 1)
 							{
-								WORK = (WORK_setting-1);
+								WORK = (WORK_setting);
 							//	WORK_OK = 0;
 								ROUND--;
 								Buzz(400);
@@ -1309,7 +1321,7 @@ main()
 							WORK = WORK_setting;
 							TIMES = TIMES_setting;
 							tmp = (TIMES_setting * 60);
-							Starting_time = 10;
+							Starting_time = 11;
 							run = 1;
 							WORK_OK = 0;
 							start = 0;
@@ -1339,7 +1351,7 @@ main()
 				{
 					start = 0;
 					run = 1;
-					Starting_time = 10;
+					Starting_time = 11;
 					tmp = (TIMES_setting * 60);
 					WORK_OK =0;
 					TIMES_OK = 0;
@@ -1397,7 +1409,7 @@ main()
 					ROUND = ROUND_setting;
 					WORK = WORK_setting ;
 					TIMES = TIMES_setting ;
-					Starting_time = 10;
+					Starting_time = 11;
 					work_Mode = MODE_NORMAL;
 					update_all = 1;
 					Buzz(100);
@@ -1440,8 +1452,8 @@ main()
 			time_UnNormal = 0;
 
 
-			segments_value_present[0] = '0';
-			segments_value_present[1] = '0';
+			segments_value_present[0] = 'F';
+			segments_value_present[1] = 3;
 			segments_value_present[2] = time_Minute_AMRAP/10;
 			segments_value_present[3] = time_Minute_AMRAP%10;
 			segments_value_present[4] = time_Second_AMRAP/10;
@@ -1458,10 +1470,10 @@ main()
 						{
 							Starting_time --;
 							time_Second_AMRAP = Starting_time;							
-							if(Starting_time <3)
+							if(Starting_time <4)
 								Buzz(100);
 
-							if(Starting_time<0)
+							if(Starting_time<1)
 							{
 								run = 0;
 								time_Second_AMRAP = time_Second_AMRAP_setting;
@@ -1487,7 +1499,7 @@ main()
 										AMRAP_run = 0;
 										start = 0;	
 										run = 1;
-										Starting_time = 10;
+										Starting_time = 11;
 										Buzz(100);
 										delay_ms(150);
 										Buzz(100);
@@ -1546,7 +1558,7 @@ main()
 					{
 						time_Minute_AMRAP = time_Minute_AMRAP_setting;
 						time_Second_AMRAP = time_Second_AMRAP_setting;
-						Starting_time= 10;
+						Starting_time= 11;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1595,7 +1607,7 @@ main()
 					{
 						time_Minute_AMRAP = time_Minute_AMRAP_setting;
 						time_Second_AMRAP = time_Second_AMRAP_setting;
-						Starting_time = 10;
+						Starting_time = 11;
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
@@ -1629,7 +1641,7 @@ main()
 					start = 0;
 					time_Minute_AMRAP = time_Minute_AMRAP_setting;
 					time_Second_AMRAP = time_Second_AMRAP_setting;
-					Starting_time = 10;
+					Starting_time = 11;
 					work_Mode = MODE_NORMAL;
 					Buzz(100);
 					delay_ms(50);
@@ -1639,7 +1651,7 @@ main()
 				{
 					start = 0;
 					run = 1;
-					Starting_time = 10;
+					Starting_time = 11;
 					time_Minute_AMRAP = time_Minute_AMRAP_setting;
 					time_Second_AMRAP = time_Second_AMRAP_setting;
 					Buzz(100);
@@ -1730,98 +1742,3 @@ main()
 
 
 
-/*else if(work_Mode == MODE_CORNOMETR)
-		{
-			time_UnNormal = 0;
-
-			segments_value_present[0] = 'S';
-			segments_value_present[1] = 'P';
-			segments_value_present[2] = time_Second_Cornometr/10;
-			segments_value_present[3] = time_Second_Cornometr%10;
-			segments_value_present[4] = time_mili_Second_Cornometr/10;
-			segments_value_present[5] = time_mili_Second_Cornometr%10;
-
-			if(SETTING == DEFAULT)
-			{
-				if(Cornometr_run == 1)
-				{
-					delay_ms(100);
-					time_mili_Second_Cornometr++;
-					if(time_mili_Second_Cornometr>99)
-					{
-						time_mili_Second_Cornometr = 0;
-						time_Second_Cornometr = time_Second_Cornometr+1;
-						if(time_Second_Cornometr>59)
-						{
-							time_Second_Cornometr = 0;
-							Cornometr_run = 0;
-						}
-					}
-				}
-				
-			}
-			
-
-			if(IRRemote_Ready)
-			{
-				irRemote_feedback = IRRemote_Read();
-				if(irRemote_feedback == COLORCHANGE)
-				{
-					update_all = 1;
-					Buzz(100);
-				}
-				else if(irRemote_feedback ==  KEY_1)
-				{
-					Cornometr_run = 0 ;
-					time_mili_Second_Cornometr = 0;
-					time_Second_Cornometr = 0;
-					update_all ;
-					Buzz (200);
-				}
-				else if(irRemote_feedback == ONN_STATUS)
-				{
-					SETTING = DEFAULT;
-					if(Cornometr_run == 0)
-					{
-						Cornometr_run  = 1;
-						Buzz (200);
-					}	
-					else
-					{
-						Cornometr_run = 0;
-						Buzz(200);
-					}
-				}
-				else if(irRemote_feedback == OFF_STATUS)
-				{
-					work_Mode = MODE_NORMAL;
-					Buzz(100);
-				}
-			}
-				
-			for (i = 0; i < 7; i++)
-			{
-				if((segments_value_present[i] != segments_value_last[i]) || (update_all == 1))
-				{
-					if(i == 0)
-						Segment(i,segments_value_present[i],COLOR_HISTORY_1,LEVEL_FULL);
-					else if(i == 1)
-						Segment(i,segments_value_present[i],COLOR_HISTORY_1,LEVEL_FULL);
-					else
-						Segment(i,segments_value_present[i],SYSTEMCOLOR,LEVEL_FULL);
-
-					segments_value_last[i] = segments_value_present[i];
-				}
-			}
-
-			dotpint_state = 1;
-			if((dotpint_state != dotpint_state_last) || (update_all == 1))
-			{
-				dotpint_state_last = dotpint_state;
-				DotPoints(1,dotpint_state,SYSTEMCOLOR,LEVEL_FULL);
-			//	DotPoints(4,dotpint_state,SYSTEMCOLOR,LEVEL_FULL);
-			}
-
-			update_all = 0;
-			
-		}*/
