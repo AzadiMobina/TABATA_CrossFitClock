@@ -5,6 +5,12 @@
  * 
  * Copyright (c) 2002-2005 STMicroelectronics
  */
+ 
+ 
+ 
+ 
+ 
+ 
 
 #include "initialization.h"
 
@@ -581,6 +587,8 @@ main()
 			}
 
 			update_all = 0;
+			if(work_Mode != MODE_COUNTER_UP)
+				update_all = 1;
 
 		}
 		
@@ -790,6 +798,8 @@ main()
 			}
 
 			update_all = 0;
+			if(work_Mode != MODE_COUNTER_DN)
+				update_all = 1;
 
 		}	
 		
@@ -846,7 +856,7 @@ main()
 						SETTING = DEFAULT;
 						Buzz(200);
 					}
-					}
+				}
 					
 			}
 			
@@ -1099,13 +1109,15 @@ main()
 				}
 				else if(irRemote_feedback == OFF_STATUS)
 				{
+					
 					start = 0;
 					run = 0;
 					CYKEL = CYKEL_setting;
 					ACT = ACT_setting ;
 					REST = REST_setting ;
-					work_Mode = MODE_NORMAL;
 					update_all = 1;
+					work_Mode = MODE_NORMAL;
+					
 					Buzz(100);
 				}
 			}
@@ -1138,6 +1150,8 @@ main()
 			}
 
 			update_all = 0;
+			if(work_Mode != TABATA)
+				update_all = 1;
 		
 		}	
 
@@ -1444,6 +1458,8 @@ main()
 			}
 
 			update_all = 0;
+			if(work_Mode != EMOM)
+				update_all = 1;
 		
 		}
 
@@ -1708,6 +1724,8 @@ main()
 			}
 
 			update_all = 0;
+			if(work_Mode != AMRAP)
+				update_all = 1;
 
 		}
 	}

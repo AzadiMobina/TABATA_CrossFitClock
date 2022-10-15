@@ -159,6 +159,7 @@ void Segment_1_Update(void)
     }
 }
 
+
 void Segment_2_SetBit(uint8_t state)
 {
     if(state)
@@ -223,6 +224,7 @@ void Segment_2_Update(void)
         }
     }
 }
+
 
 void Segment_3_SetBit(uint8_t state)
 {
@@ -744,9 +746,6 @@ void DotPoints_Update(void)
         }
     }
 }
-
-
-
 
 void Segment_SetData(uint8_t segId , uint8_t state)
 {
@@ -1369,9 +1368,9 @@ void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlev
     case 7:
         Segment_7_Update();
         break;
-    case 8:
+    /*case 8:
         Segment_8_Update();
-        break;
+        break;*/
     case 9:
         Segment_9_Update();
         break;
