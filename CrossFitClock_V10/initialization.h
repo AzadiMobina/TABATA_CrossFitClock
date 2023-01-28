@@ -209,7 +209,17 @@ void StartUp_Show(void)
 			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL);		
 		}
 		delay_ms(500);
+
 	}
+	Segment(0,'U',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(1,'L',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(2,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(3,1,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(4,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(5,1,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(6,1,SYSTEMCOLOR,LEVEL_FULL);
+	delay_ms(1500);
+
 }
 
 void Initializer(void)
