@@ -155,7 +155,7 @@ main()
 					
 				}
 			}
-
+			
 			if((dotpint_state != dotpint_state_last) || (update_all == 1))
 			{
 				dotpint_state_last = dotpint_state;
@@ -245,7 +245,7 @@ main()
 		
 			for (i = 0; i < 7; i++)
 			{
-				if(segments_value_present[i] != segments_value_last[i])
+				if(segments_value_present[i] != segments_value_last[i]|| (update_all == 1))
 				{
 					if(segments_value_present[i] == BLINK)
 						Segment(i,segments_value_present[i],0,LEVEL_FULL);
@@ -637,41 +637,7 @@ main()
 
 				}
 
-				/*if((counter_start == 1))
-				{
-					if(part>0)
-					{
-						time_Minute_dn = 0;
-						segments_value_present[0] = 'L';
-						segments_value_present[1] = 'O';
-						segments_value_present[2] =  time_Minute_dn/10;
-						segments_value_present[3] = time_Minute_dn%10;
-						segments_value_present[4] = time_Second_dn/10;
-						segments_value_present[5] = time_Second_dn%10;
-
-					}
-					
-					
-					if(part==0)
-					{
-						delay_ms(100);
-						counter_start = 0;
-						counter_run = 1;
-						Buzz(500);
-						delay_ms(50);
-						
-					}
-					else 
-					{
-						part=part-1;
-						time_Second_dn = part;
-						delay_ms(1000);
-						Buzz(100);
-					}
-					
-					
-				}*/
-
+				
 			}
 			else if(SETTING == SET_M_COUNTER_DN)
 			{
@@ -1729,6 +1695,8 @@ main()
 
 		}
 	}
+
+
 
 }
 
