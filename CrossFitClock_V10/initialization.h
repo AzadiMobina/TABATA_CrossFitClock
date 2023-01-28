@@ -197,15 +197,18 @@ void StartUp_Show(void)
 {
 	int i;
 	int j;
-	
-
+	for (i = 0; i < 7; i++)
+	{	
+		Segment(i,8,SYSTEMCOLOR,LEVEL_FULL);		
+	}
+	delay_ms(200);
 	for ( j = 0; j < 7; j++)
 	{
 		for (i = 0; i < j; i++)
 		{	
 			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL);		
 		}
-		delay_ms(1000);
+		delay_ms(500);
 	}
 }
 
