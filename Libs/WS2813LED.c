@@ -40,14 +40,14 @@ void Segment_0_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOB->ODR &= (uint8_t)(~GPIO_PIN_0);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -57,14 +57,14 @@ void Segment_0_SetBit(uint8_t state)
     {
         GPIOB->ODR |= (uint8_t)GPIO_PIN_0;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOB->ODR &= (uint8_t)(~GPIO_PIN_0);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -76,7 +76,7 @@ void Segment_0_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -92,6 +92,7 @@ void Segment_0_Update(void)
             Segment_0_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_1_SetBit(uint8_t state)
@@ -105,14 +106,14 @@ void Segment_1_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_7);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -122,14 +123,14 @@ void Segment_1_SetBit(uint8_t state)
     {
         GPIOE->ODR |= (uint8_t)GPIO_PIN_7;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_7);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -141,7 +142,7 @@ void Segment_1_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -157,6 +158,7 @@ void Segment_1_Update(void)
             Segment_1_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 
@@ -171,14 +173,14 @@ void Segment_2_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_6);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -188,14 +190,14 @@ void Segment_2_SetBit(uint8_t state)
     {
         GPIOE->ODR |= (uint8_t)GPIO_PIN_6;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_6);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -207,7 +209,7 @@ void Segment_2_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -223,6 +225,7 @@ void Segment_2_Update(void)
             Segment_2_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 
@@ -237,14 +240,14 @@ void Segment_3_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -254,14 +257,14 @@ void Segment_3_SetBit(uint8_t state)
     {
         GPIOE->ODR |= (uint8_t)GPIO_PIN_5;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOE->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -273,7 +276,7 @@ void Segment_3_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -289,6 +292,7 @@ void Segment_3_Update(void)
             Segment_3_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_4_SetBit(uint8_t state)
@@ -302,14 +306,14 @@ void Segment_4_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_1);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -319,14 +323,14 @@ void Segment_4_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_1;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_1);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -338,7 +342,7 @@ void Segment_4_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -354,6 +358,7 @@ void Segment_4_Update(void)
             Segment_4_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_5_SetBit(uint8_t state)
@@ -367,14 +372,14 @@ void Segment_5_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_2);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -384,14 +389,14 @@ void Segment_5_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_2;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_2);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -403,7 +408,7 @@ void Segment_5_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -419,6 +424,7 @@ void Segment_5_Update(void)
             Segment_5_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_6_SetBit(uint8_t state)
@@ -432,14 +438,14 @@ void Segment_6_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_3);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -449,14 +455,14 @@ void Segment_6_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_3;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_3);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -468,7 +474,7 @@ void Segment_6_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -484,6 +490,7 @@ void Segment_6_Update(void)
             Segment_6_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_7_SetBit(uint8_t state)
@@ -497,14 +504,14 @@ void Segment_7_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -514,14 +521,14 @@ void Segment_7_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_5;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -533,7 +540,7 @@ void Segment_7_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -549,6 +556,7 @@ void Segment_7_Update(void)
             Segment_7_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_8_SetBit(uint8_t state)
@@ -562,14 +570,14 @@ void Segment_8_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_6);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -579,14 +587,14 @@ void Segment_8_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_6;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_6);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -598,7 +606,7 @@ void Segment_8_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -614,6 +622,7 @@ void Segment_8_Update(void)
             Segment_8_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_9_SetBit(uint8_t state)
@@ -627,14 +636,14 @@ void Segment_9_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_7);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -644,14 +653,14 @@ void Segment_9_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_7;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_7);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -663,7 +672,7 @@ void Segment_9_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -679,6 +688,7 @@ void Segment_9_Update(void)
             Segment_9_SetBit(((segmentdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 
@@ -693,14 +703,14 @@ void DotPoints_SetBit(uint8_t state)
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
         
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
  
       
@@ -710,14 +720,14 @@ void DotPoints_SetBit(uint8_t state)
     {
         GPIOC->ODR |= (uint8_t)GPIO_PIN_5;
         nop();
-        nop();
+        //nop();
         //
 
         GPIOC->ODR &= (uint8_t)(~GPIO_PIN_5);
         nop();
         nop();
         nop();
-        nop();
+        //nop();
         //
      
 
@@ -729,7 +739,7 @@ void DotPoints_Update(void)
 {
     int i;
     int j;
-
+    disableInterrupts();
     for(j=0;j<14;j++)
     {
         for(i=128;i>=1;i=i/2)
@@ -745,6 +755,7 @@ void DotPoints_Update(void)
             DotPoints_SetBit(((dotpointdata[j][2] & i) == i));
         }
     }
+    enableInterrupts();
 }
 
 void Segment_SetData(uint8_t segId , uint8_t state)
