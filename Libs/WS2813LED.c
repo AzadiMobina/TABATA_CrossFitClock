@@ -703,6 +703,7 @@ void DotPoints_SetBit(uint8_t state)
         nop();
         //
  
+ 
       
 
     }
@@ -1049,144 +1050,267 @@ void DotPoints_Map(uint8_t dotnum,uint8_t state)
     }
 }
 
-void Segment_SetColor(uint8_t colornum , uint8_t lightlevel)
+void Segment_Color_Update(int i, uint8_t lightlevel)
+{
+    int k;
+    int j = 0;
+    for (k = 0; k < 14; k++)
+    {
+        if((segmentdata[k][0] + segmentdata[k][1] + segmentdata[k][2]) != 0)
+        {
+            switch (i)
+            {
+            case 0:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 0; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+            
+            case 1:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 4; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+            
+            case 2:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 7; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+
+            case 3:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+            
+            case 4:
+                segmentdata[k][0] = 5; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+            
+            case 5:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 0; //blue
+                break;
+            
+            case 6:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 4; //blue
+                break;
+            
+            case 7:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 7; //blue
+                break;
+            
+            case 8:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            
+            case 9:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 5; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            
+            case 10:
+                segmentdata[k][0] = 0; //red
+                segmentdata[k][1] = 0; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            
+            case 11:
+                segmentdata[k][0] = 5; //red
+                segmentdata[k][1] = 0; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            
+            case 12:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 0; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            
+            case 13:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 0; //green
+                segmentdata[k][2] = 5; //blue
+                break;
+            
+            default:
+                segmentdata[k][0] = 10; //red
+                segmentdata[k][1] = 10; //green
+                segmentdata[k][2] = 10; //blue
+                break;
+            }
+            
+            
+          
+            segmentdata[k][0] *= lightlevel; //green
+            segmentdata[k][1] *= lightlevel; //reed
+            segmentdata[k][2] *= lightlevel; //blue             
+        } 
+        if (++i>14)
+            i = 0;
+          
+    } 
+}
+
+void Segment_SetColor(uint8_t colornum , uint8_t lightlevel, uint8_t loop)
 {
     int i;
     uint8_t greenLevel;
     uint8_t redLevel;
     uint8_t blueLevel;
-    
-    if(colornum == SYSTEMCOLOR)
-        colornum = Color_Get(0);
-    else if(colornum == COLOR_HISTORY_1)
-        colornum = Color_Get(1);
-    else if(colornum == COLOR_HISTORY_2)
-        colornum = Color_Get(2);
 
-    switch (colornum)
+    if (colornum != COLORMODE)
     {
-    case 0:
-        greenLevel = 0;
-        redLevel = 0;
-        blueLevel = 0;
-        break;
+
     
-    case 1:
-        greenLevel = COLOR_100;
-        redLevel = COLOR_100;
-        blueLevel = COLOR_100;
-        break;
     
-    case 2:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_100;
-        break;
-    
-    case 3:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_100;
-        blueLevel = COLOR_0;
-        break;
-    
-    case 4:
-        greenLevel = COLOR_100;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_0;
-        break;
-    
-    case 5:
-        greenLevel = COLOR_10;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_90;
-        break;
-    
-    case 6:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_80;
-        blueLevel = COLOR_20;
-        break;
-    
-    case 7:
-        greenLevel = COLOR_100;
-        redLevel = COLOR_20;
-        blueLevel = COLOR_0;
-        break;
-    
-    case 8:
-        greenLevel = COLOR_20;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_90;
-        break;
-    
-    case 9:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_60;
-        blueLevel = COLOR_40;
-        break;
-    
-    case 10:
-        greenLevel = COLOR_100;
-        redLevel = COLOR_40;
-        blueLevel = COLOR_0;
-        break;
-    
-    case 11:
-        greenLevel = COLOR_40;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_40;
-        break;
-    
-    case 12:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_40;
-        blueLevel = COLOR_40;
-        break;
-    
-    case 13:
-        greenLevel = COLOR_80;
-        redLevel = COLOR_40;
-        blueLevel = COLOR_0;
-        break;
-    
-    case 14:
-        greenLevel = COLOR_60;
-        redLevel = COLOR_0;
-        blueLevel = COLOR_20;
-        break;
-    
-    case 15:
-        greenLevel = COLOR_0;
-        redLevel = COLOR_40;
-        blueLevel = COLOR_60;
-        break;
-    
-    case 16:
-        greenLevel = COLOR_60;
-        redLevel = COLOR_40;
-        blueLevel = COLOR_0;
-        break;
-    
-    default:
-        greenLevel = COLOR_100;
-        redLevel = COLOR_100;
-        blueLevel = COLOR_100;
-        break;
+        if(colornum == SYSTEMCOLOR)
+            colornum = Color_Get(0);
+        else if(colornum == COLOR_HISTORY_1)
+            colornum = Color_Get(1);
+        else if(colornum == COLOR_HISTORY_2)
+            colornum = Color_Get(2);    
+
+        switch (colornum)
+        {
+        case 0:
+            greenLevel = 0;
+            redLevel = 0;
+            blueLevel = 0;
+            break;
+        
+        case 1:
+            greenLevel = COLOR_100;
+            redLevel = COLOR_100;
+            blueLevel = COLOR_100;
+            break;
+        
+        case 2:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_100;
+            break;
+        
+        case 3:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_100;
+            blueLevel = COLOR_0;
+            break;
+        
+        case 4:
+            greenLevel = COLOR_100;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_0;
+            break;
+        
+        case 5:
+            greenLevel = COLOR_10;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_90;
+            break;
+        
+        case 6:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_80;
+            blueLevel = COLOR_20;
+            break;
+        
+        case 7:
+            greenLevel = COLOR_100;
+            redLevel = COLOR_20;
+            blueLevel = COLOR_0;
+            break;
+        
+        case 8:
+            greenLevel = COLOR_20;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_90;
+            break;
+        
+        case 9:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_60;
+            blueLevel = COLOR_40;
+            break;
+        
+        case 10:
+            greenLevel = COLOR_100;
+            redLevel = COLOR_40;
+            blueLevel = COLOR_0;
+            break;
+        
+        case 11:
+            greenLevel = COLOR_40;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_40;
+            break;
+        
+        case 12:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_40;
+            blueLevel = COLOR_40;
+            break;
+        
+        case 13:
+            greenLevel = COLOR_80;
+            redLevel = COLOR_40;
+            blueLevel = COLOR_0;
+            break;
+        
+        case 14:
+            greenLevel = COLOR_60;
+            redLevel = COLOR_0;
+            blueLevel = COLOR_20;
+            break;
+        
+        case 15:
+            greenLevel = COLOR_0;
+            redLevel = COLOR_40;
+            blueLevel = COLOR_60;
+            break;
+        
+        case 16:
+            greenLevel = COLOR_60;
+            redLevel = COLOR_40;
+            blueLevel = COLOR_0;
+            break;
+        
+        default:
+            greenLevel = COLOR_100;
+            redLevel = COLOR_100;
+            blueLevel = COLOR_100;
+            break;
+        }
+
+
+
+        redLevel *= lightlevel;
+        greenLevel *= lightlevel;
+        blueLevel *= lightlevel;
+
+
+        for (i = 0; i < 14; i++)
+        {
+            segmentdata[i][0] *= redLevel;
+            segmentdata[i][1] *= greenLevel;
+            segmentdata[i][2] *= blueLevel;
+
+        }
     }
-
-
-
-    redLevel *= lightlevel;
-    greenLevel *= lightlevel;
-    blueLevel *= lightlevel;
-
-
-    for (i = 0; i < 14; i++)
+    else
     {
-        segmentdata[i][0] *= redLevel;
-        segmentdata[i][1] *= greenLevel;
-        segmentdata[i][2] *= blueLevel;
-
+        Segment_Color_Update(loop,lightlevel);
     }
     
 
@@ -1336,11 +1460,11 @@ void DotPoints_SetColor(uint8_t colornum , uint8_t lightlevel)
 
 
 
-void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlevel)
+void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlevel, uint8_t loop)
 {
     
     Segment_Map(value);
-    Segment_SetColor(colornum,lightlevel);
+    Segment_SetColor(colornum,lightlevel,loop);
 
     switch (segmentnum)
     {
@@ -1390,8 +1514,8 @@ void DotPoints(uint8_t dotnum,uint8_t state, uint8_t colornum,uint8_t lightlevel
     delay_us(10);*/
 
     if(state == 1)
-        Segment(6,8,SYSTEMCOLOR,LEVEL_FULL);
+        Segment(6,8,SYSTEMCOLOR,LEVEL_FULL,0);
     else
-        Segment(6,8,0,LEVEL_FULL);
+        Segment(6,8,0,LEVEL_FULL,0);
 
 }

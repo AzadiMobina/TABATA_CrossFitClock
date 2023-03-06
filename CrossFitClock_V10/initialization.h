@@ -101,7 +101,11 @@ uint8_t SETTING = DEFAULT;
 uint8_t work_Mode = MODE_NORMAL;
 uint8_t mode_show_12 = 0;
 uint8_t mode_show_OFF = 0;
+uint8_t mode_show_color = 0;
 uint8_t mode_show_temp = 1;
+uint8_t color_mode = 0;
+uint16_t color_loop_time = 0;
+int  numloop = 1;
 
 
 void System_Clk_Config(void)
@@ -197,16 +201,27 @@ void StartUp_Show(void)
 {
 	int i;
 	int j;
-	
-
+	for (i = 0; i < 7; i++)
+	{	
+		Segment(i,8,SYSTEMCOLOR,LEVEL_FULL,0);		
+	}
+	delay_ms(200);
 	for ( j = 0; j < 7; j++)
 	{
 		for (i = 0; i < j; i++)
 		{	
-			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL);		
+			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL,0);		
 		}
-		delay_ms(1000);
+		delay_ms(500);
+		
 	}
+	Segment(0,'U',SYSTEMCOLOR,LEVEL_FULL,0);
+	Segment(1,'L',SYSTEMCOLOR,LEVEL_FULL,0);
+	Segment(2,0,SYSTEMCOLOR,LEVEL_FULL,0);
+	Segment(3,1,SYSTEMCOLOR,LEVEL_FULL,0);
+	Segment(4,0,SYSTEMCOLOR,LEVEL_FULL,0);
+	Segment(5,4,SYSTEMCOLOR,LEVEL_FULL,0); /// add molti color mode in new version
+	delay_ms(1500);
 }
 
 void Initializer(void)

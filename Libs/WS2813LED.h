@@ -6,7 +6,6 @@
 
 
 void delay_us(int time);
-
 /*
 #define SEGMENT_0_PIN  GPIOE,GPIO_PIN_7     
 #define SEGMENT_1_PIN  GPIOE,GPIO_PIN_6 
@@ -19,7 +18,6 @@ void delay_us(int time);
 #define SEGMENT_8_PIN  GPIOC,GPIO_PIN_7 
 #define SEGMENT_9_PIN GPIOG,GPIO_PIN_0 
 */
-
 #define SEGMENT_0_PIN  GPIOB,GPIO_PIN_0     
 #define SEGMENT_1_PIN  GPIOE,GPIO_PIN_7 
 #define SEGMENT_2_PIN  GPIOE,GPIO_PIN_6 
@@ -60,9 +58,8 @@ void delay_us(int time);
 #define SYSTEMCOLOR 'Y'
 #define COLOR_HISTORY_1 'X'
 #define COLOR_HISTORY_2 'x'
-
+#define COLORMODE      'y'
 #define LEVEL_FULL 25
-
 
 void Segment_Pins_Config(void);
 
@@ -106,15 +103,15 @@ void Segment_8_Update(void);
 void Segment_9_SetBit(uint8_t state);
 
 void Segment_9_Update(void);
-
+void Segment_Color_Update(int i, uint8_t lightlevel);
 
 void Segment_SetData(uint8_t segId , uint8_t state);
 
 void Segment_Map(uint8_t num);
 
-void Segment_SetColor(uint8_t colornum , uint8_t lightlevel);
+void Segment_SetColor(uint8_t colornum , uint8_t lightlevel,uint8_t loop);
 
-void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlevel);
+void Segment(uint8_t segmentnum,uint8_t value, uint8_t colornum,uint8_t lightlevel, uint8_t loop);
 
 
 void DotPoints(uint8_t dotnum,uint8_t state, uint8_t colornum,uint8_t lightlevel);
