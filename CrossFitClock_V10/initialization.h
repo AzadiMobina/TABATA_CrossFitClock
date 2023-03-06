@@ -203,7 +203,11 @@ void StartUp_Show(void)
 	int j;
 	for (i = 0; i < 7; i++)
 	{	
+<<<<<<< HEAD
 		Segment(i,8,SYSTEMCOLOR,LEVEL_FULL,0);		
+=======
+		Segment(i,8,SYSTEMCOLOR,LEVEL_FULL);		
+>>>>>>> 6ecb2e6fe7359c3d6ed1994342b4b74b0612f8a8
 	}
 	delay_ms(200);
 	for ( j = 0; j < 7; j++)
@@ -213,6 +217,7 @@ void StartUp_Show(void)
 			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL,0);		
 		}
 		delay_ms(500);
+<<<<<<< HEAD
 		
 	}
 	Segment(0,'U',SYSTEMCOLOR,LEVEL_FULL,0);
@@ -222,6 +227,18 @@ void StartUp_Show(void)
 	Segment(4,0,SYSTEMCOLOR,LEVEL_FULL,0);
 	Segment(5,4,SYSTEMCOLOR,LEVEL_FULL,0); /// add molti color mode in new version
 	delay_ms(1500);
+=======
+
+	}
+	Segment(0,'U',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(1,'L',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(2,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(3,1,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(4,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(5,2,SYSTEMCOLOR,LEVEL_FULL);
+	delay_ms(1500);
+
+>>>>>>> 6ecb2e6fe7359c3d6ed1994342b4b74b0612f8a8
 }
 
 void Initializer(void)

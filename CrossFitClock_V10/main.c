@@ -212,6 +212,109 @@ main()
 			}
 
 			update_all = 0;
+<<<<<<< HEAD
+=======
+		
+		
+		}
+
+
+
+		else if(work_Mode == MENU )
+		{
+			time_UnNormal = 0;
+
+			segments_value_present[0] = 'F';
+			segments_value_present[1] = CONDITION;
+			segments_value_present[2] = 'N';
+			segments_value_present[3] = 'N';
+			segments_value_present[4] = 'N';
+			segments_value_present[5] = 'N';
+
+			if(IRRemote_Ready)
+			{
+				time_UnNormal = 0;
+				irRemote_feedback = IRRemote_Read();
+				if(irRemote_feedback == COLORCHANGE)
+				{
+					update_all = 1;
+					Buzz(100);
+				}
+				else if(irRemote_feedback == INCREASE)
+				{
+					if(++CONDITION>5)
+						CONDITION = 1;
+					Buzz(100);
+				}
+				else if(irRemote_feedback == DECREASE)
+				{
+					if(CONDITION == 1)
+						CONDITION = 5;
+					else 
+						CONDITION--;
+					Buzz(100);
+				}
+				else if(irRemote_feedback == ONN_STATUS)
+				{
+					
+				}
+				else if (irRemote_feedback == KEY_1)
+				{
+					if(CONDITION == 1)
+					{
+						work_Mode = TABATA;
+						Buzz(100);
+					}
+					else if(CONDITION == 2)
+					{
+						work_Mode = EMOM;
+						Buzz(100);
+					}
+					else if(CONDITION == 3)
+					{
+						work_Mode = AMRAP ;
+						Buzz(100);
+					}
+					else if(CONDITION == 4)
+					{
+						work_Mode = MODE_COUNTER_UP ;
+						Buzz(100);
+					}
+					else if( CONDITION == 5)
+					{
+						work_Mode = MODE_COUNTER_DN;
+						Buzz(100);
+					}
+				}
+				else if (irRemote_feedback == OFF_STATUS)
+				{
+					work_Mode = MODE_NORMAL;
+					Buzz(200);
+				}
+			}
+		
+			for (i = 0; i < 7; i++)
+			{
+				if(segments_value_present[i] != segments_value_last[i]|| (update_all == 1))
+				{
+					if(segments_value_present[i] == BLINK)
+						Segment(i,segments_value_present[i],0,LEVEL_FULL);
+					else
+						Segment(i,segments_value_present[i],SYSTEMCOLOR,LEVEL_FULL);
+
+					segments_value_last[i] = segments_value_present[i];
+				}
+			}
+
+			dotpint_state = 1;
+			if((dotpint_state != dotpint_state_last) || (update_all == 1))
+			{
+				dotpint_state_last = dotpint_state;
+				DotPoints(1,dotpint_state,SYSTEMCOLOR,LEVEL_FULL);
+				//DotPoints(4,dotpint_state,SYSTEMCOLOR,LEVEL_FULL);
+			}
+			update_all = 0;
+>>>>>>> 6ecb2e6fe7359c3d6ed1994342b4b74b0612f8a8
 		}
 
 		else if(work_Mode == MODE_SET_CLOCK_HOUR)
@@ -720,6 +823,10 @@ main()
 	}
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ecb2e6fe7359c3d6ed1994342b4b74b0612f8a8
 }
 
 
