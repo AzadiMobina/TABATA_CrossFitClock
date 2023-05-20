@@ -398,6 +398,7 @@ main()
 					Buzz(100);
 				}
 
+
 			for (i = 0; i < 7; i++)
 			{
 				if((segments_value_present[i] != segments_value_last[i]) || (update_all == 1))
