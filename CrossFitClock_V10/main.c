@@ -94,15 +94,15 @@ main()
 				flag_tempreture_read = 0;
 			}
 
-			if(GPIO_ReadInputPin() == RESET)
+			/*if(GPIO_ReadInputPin() == RESET)
 			{
 				work_Mode =  MODE_COUNTER_UP;
 				time_Minute_Cornometr = 0;
 				time_Second_Cornometr = 0;
-				counter_run = 0;
+				Cornometr_run = 0;
 				Buzz(200);
 
-			}
+			}*/
 
 			
 			if(IRRemote_Ready)
@@ -136,21 +136,13 @@ main()
 				else if(irRemote_feedback == KEY_3)
 				{
 					work_Mode = MODE_COUNTER_UP;
-					time_Minute_Counter =0;
-					time_Second_Counter = 0;
-					counter_run = 0;
+					time_Minute_Cornometr =0;
+					time_Second_Cornometr = 0;
+					Cornometr_run= 0;
 					update_all = 1;
 					Buzz(200);
 				}
-				else if(irRemote_feedback == KEY_4)
-				{
-					work_Mode = MODE_COUNTER_DN;
-					time_Minute_Counter =0;
-					time_Second_Counter = 0;
-					counter_run = 0;
-					update_all = 1;
-					Buzz(200);
-				}
+				
 
 				else if(irRemote_feedback == ONN_STATUS)
 				{
@@ -405,9 +397,6 @@ main()
 					work_Mode = MODE_NORMAL;
 					Buzz(100);
 				}
-
-				
-				
 
 			for (i = 0; i < 7; i++)
 			{
