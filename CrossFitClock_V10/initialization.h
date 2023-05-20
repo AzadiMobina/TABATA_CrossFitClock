@@ -22,61 +22,17 @@ int time_TempShow = 0;
 uint8_t time_update_all = 0;
 uint8_t update_all = 1;
 
-int time_Second_Counter = 0;
-int time_Minute_Counter = 0;
-int time_Hour_Counter = 0;
-int time_Minute_Counter_setting = 0;
-int time_Second_Counter_setting = 0;
-uint8_t counter_run = 0;
-uint8_t counter_start = 0;
-int time_Second_dn=0;
-int time_Minute_dn =0;
 
 int time_Minute_Cornometr = 0;
 uint8_t time_Second_Cornometr = 0;
+int time_Minute_Cornometr_temp = 0;
+uint8_t time_Second_Cornometr_temp = 0;
 uint8_t time_mili_Second_Cornometr = 0;
+uint8_t time_mili_Second_Cornometr_temp = 0;
 
 uint8_t Cornometr_run = 0;
 
-uint8_t start = 0;
-uint8_t run = 0;
-int CYKEL = 8;
-int ACT = 20;
-int REST = 10;
-int REST_setting = 10;
-int ACT_setting = 20;
-int CYKEL_setting = 8;
-int Starting_time = 11;
-uint8_t ACT_OK = 0;
-uint8_t REST_OK = 0;
-
-int WORK = 60;
-int TIMES = 5;
-int ROUND = 5;
-int TIMES_setting = 5;
-int ROUND_setting = 5;
-int WORK_setting = 60;
-int tmp = 0;
-uint8_t WORK_OK = 0;
-uint8_t TIMES_OK = 0;  ////???????
-uint8_t ROUND_OK = 0;
-
-int time_Second_AMRAP = 30;
-int time_Minute_AMRAP = 1;
-uint8_t AMRAP_run = 0;
-int time_Minute_AMRAP_setting = 1;
-int time_Second_AMRAP_setting = 30;
-
-
-int CONDITION = 1;
-
 #define MENU 	'S'
-#define  TABATA 'T'
-#define EMOM 	'E'
-#define AMRAP 	'A'
-#define SET_CYKEL 'c'
-#define SET_ACT	'a'
-#define SET_REST 'r'
 #define DEFAULT 'e'
 
 
@@ -89,10 +45,6 @@ int CONDITION = 1;
 #define MODE_CORNOMETR          'C'
 #define SET_M_COUNTER_UP		'm'
 #define SET_S_COUNTER_UP		's'
-#define SET_M_COUNTER_DN	    'd'
-#define SET_S_COUNTER_DN	    'S'
-#define SET_M_AMRAP_DN			'p'
-#define SET_S_AMRAP_DN			'P'
 #define MODE_NORMAL             'N'
 #define BLINK                   'B'
 
@@ -185,8 +137,8 @@ uint8_t NTC_Read(void)
     ADC2_StartConversion();
     while(ADC2_GetFlagStatus() == RESET);
     ntc_adc = ADC2_GetConversionValue();
-
-    ret = (ntc_adc/10) - 30;
+		//ret = (ntc_adc/10) - 30;
+    ret = (ntc_adc/10) - 10;
     if(ret < 0)     ret  = 0 ;
 
     return (uint8_t)ret;
@@ -197,16 +149,27 @@ void StartUp_Show(void)
 {
 	int i;
 	int j;
-	
-
+	for (i = 0; i < 7; i++)
+	{	
+		Segment(i,8,SYSTEMCOLOR,LEVEL_FULL);		
+	}
+	delay_ms(200);
 	for ( j = 0; j < 7; j++)
 	{
 		for (i = 0; i < j; i++)
 		{	
 			Segment(i,BLINK,SYSTEMCOLOR,LEVEL_FULL);		
 		}
-		delay_ms(1000);
+		delay_ms(500);
+		
 	}
+	Segment(0,'U',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(1,'L',SYSTEMCOLOR,LEVEL_FULL);
+	Segment(2,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(3,1,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(4,0,SYSTEMCOLOR,LEVEL_FULL);
+	Segment(5,3,SYSTEMCOLOR,LEVEL_FULL);
+	delay_ms(1500);
 }
 
 void Initializer(void)
@@ -259,6 +222,16 @@ void Initializer(void)
 	{
 		time_update_all = 0;
 		update_all = 1;
+	}
+
+	time_mili_Second_Cornometr_temp = 0;
+	if(++time_Second_Cornometr_temp>59)
+	{
+		time_Second_Cornometr_temp = 0;
+		if(++time_Minute_Cornometr_temp>59)
+		{
+			time_Minute_Cornometr_temp = 0;
+		}
 	}
 
 	/*
