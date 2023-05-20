@@ -703,6 +703,7 @@ void DotPoints_SetBit(uint8_t state)
         nop();
         //
  
+ 
       
 
     }

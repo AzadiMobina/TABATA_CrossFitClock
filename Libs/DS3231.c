@@ -64,7 +64,6 @@ void I2CWrite(uint8_t slave, uint8_t addr, uint8_t * buffer, uint8_t size)
     I2C_Cmd(DISABLE);
 }
 
-
 void I2CRead(uint8_t slave, uint8_t addr, uint8_t *buffer, uint8_t size)
 {
     // need to read regs to clear some flags
